@@ -9,11 +9,14 @@ public class Driver {
             Cars.serializeCar(car1);
             System.out.println("Car has been serialized...");
             Cars car2 = Cars.deSerializeCar();
+            Cars car3 = new Cars("Corvette", new BigDecimal(78000));
             System.out.println("Car has been de-serialized from file...");
             System.out.println();
 
-            if(car2.equals(car1)){
-                System.out.println("Car has been successfully de-serialized and are equal");
+            if(car2.equals(car2)){
+                System.out.println("Car has been successfully de-serialized and are equal.");
+            }else {
+                System.out.println("These cars are not the same.");
             }
 
         }catch (Exception e){
