@@ -6,9 +6,9 @@ public class Driver {
     public static void main(String[]args){
         Cars car1 = new Cars("Lamborghini",new BigDecimal(417826));
         try {
-            car1.serializeCar(car1);
+            Cars.serializeCar(car1);
             System.out.println("Car has been serialized...");
-            Cars car2 = car1.deSerializeCar();
+            Cars car2 = Cars.deSerializeCar();
             System.out.println("Car has been de-serialized from file...");
             System.out.println();
 

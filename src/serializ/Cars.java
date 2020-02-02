@@ -13,7 +13,7 @@ public class Cars implements Serializable {
         this.price = price;
     }
 
-    public  void serializeCar(Cars car){
+    public static void serializeCar(Cars car){
         try{
             FileOutputStream fileOut = new FileOutputStream("myCars.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -28,7 +28,7 @@ public class Cars implements Serializable {
         }
     }
 
-    public  Cars deSerializeCar(){
+    public static Cars deSerializeCar(){
         try {
             FileInputStream fileIn = new FileInputStream("myCars.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
