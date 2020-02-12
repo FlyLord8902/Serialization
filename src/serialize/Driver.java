@@ -13,13 +13,23 @@ public class Driver {
             String fileName = input.next();
             Car.serializeCar(car1,fileName);
             System.out.println("Car has been serialized...");
-            car2 = Serialize.deSerCar(fileName);
+            System.out.println("Do you want to de-serialize to a new car Y/N");
+            String answer = input.next();
+            if(answer.equalsIgnoreCase("y")){
+                System.out.print("Please Enter the file you want to de-serialize from: ");
+                String dFileName = input.next();
 
-            if(car1.equals(car2)){
-                System.out.println("Car has been successfully de-serialized and are equal.");
-            }else {
-                System.out.println("These cars are not the same. Or the object is not a car");
+                car2 = Serialize.deSerCar(dFileName);
+
+                if(car1.equals(car2)){
+                    System.out.println("Car has been successfully de-serialized and are equal.");
+                }else {
+                    System.out.println("These cars are not the same. Or the object is not a car");
+                }
+            }else if(answer.equalsIgnoreCase("n")){
+                System.out.println();
             }
+
 
         }catch (Exception e){
             e.printStackTrace();

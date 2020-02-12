@@ -14,6 +14,9 @@ public class Car {
         this.brand = brand;
         this.price = price;
     }
+    public String toString(){
+        return "Brand: "+ brand +", " + "Price: "+ price;
+    }
 
     public void setBrand(String newBrand){
         this.brand = newBrand;
@@ -55,11 +58,12 @@ public class Car {
 
     public boolean equals(Object other ){
         boolean isCar = false;
-        if(other.getClass().equals(Car.class)){
-            isCar = true;
+        if(other != null && other.getClass().equals(this.getClass())){
+            Car nCar = (Car) other;
+            isCar = nCar.getBrand().equals(this.getBrand()) && nCar.getPrice().equals(this.getPrice());
         }
 
-        return isCar && ((Car) other).getBrand().equals(this.getBrand()) && ((Car) other).getPrice().equals(this.getPrice());
+        return isCar;
 
     }
 }
