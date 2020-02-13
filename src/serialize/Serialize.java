@@ -1,26 +1,33 @@
 package serialize;
 
-import java.io.File;
-
-import java.math.BigDecimal;
-import java.util.Scanner;
+import java.io.*;
 
 public class Serialize {
 
-    public static Car deSerCar(String fileName){
-        Car newCar = null;
+public static void binarySer(Object any, String filenName) {
 
-        try {
-            File fileIn = new File(fileName);
-            Scanner in = new Scanner(fileIn);
-            in.next();
-            in.next();
-            while (in.hasNext()){
-                newCar = new Car(in.next().replace(",", ""), new BigDecimal(in.next()));
-            }
-        }catch (Exception e){
+    try {
+        FileOutputStream fileOut = new FileOutputStream(filenName);
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+        out.writeObject(any);
+        out.close();
+        fileOut.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+    public static Object binaryDeSer(String fileName){
+        Object obj = null;
+        try{
+            FileInputStream fileIn = new FileInputStream(fileName);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+
+            obj = in.readObject();
+    }catch (Exception e){
             e.printStackTrace();
         }
-        return newCar;
-    }
+        return obj;
+}
 }

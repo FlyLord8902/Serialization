@@ -1,11 +1,15 @@
 package serialize;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.Serializable;
+import java.nio.charset.*;
+import java.nio.file.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Car {
+
+
+public class Car implements Serializable {
     private String brand;
     private BigDecimal price;
 
@@ -34,33 +38,48 @@ public class Car {
         return this.price;
     }
 
-    public static void serializeCar(Car car, String fileName){
-        try{
-            File fileOut = new File(fileName);
-            PrintWriter  out = new PrintWriter(fileOut);
-             ArrayList<String[]> carList = new ArrayList<>();
-             carList.add(new String[]{"Brand", "Price"});
-             carList.add(new String[]{car.brand, car.price+""});
-            for (String[] strings : carList) {
-                out.println(Arrays.deepToString(strings).replace("[","").replace("]", ""));
+    public static void serializeCarCSV(Car car, String fileName) {
+        try {
+            Charset charset = StandardCharsets.UTF_8;
+            StringBuilder line = new StringBuilder();
+            Path path = Paths.get(fileName);
+
+            try (BufferedWriter writer = Files.newBufferedWriter(path, charset)) {
+                line.append("Brand").append(",").append("Price").append("\n");
+                line.append(car.brand).append(",").append(car.price);
+                writer.write(line.toString());
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
 
-            out.close();
-
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+        public static Car deSerializeCarCSV(String fileName){
+            Car newCar = null;
+            Path nPath = Paths.get(fileName);
+
+            try(BufferedReader reader = Files.newBufferedReader(nPath)) {
+                reader.readLine();
+                String[] para = reader.readLine().split(",");
+                newCar = new Car(para[0], new BigDecimal(para[1]));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return newCar;
     }
 
 
 
     public boolean equals(Object other ){
         boolean isCar = false;
-        if(other != null && other.getClass().equals(this.getClass())){
+        if(other instanceof Car){
             Car nCar = (Car) other;
-            isCar = nCar.getBrand().equals(this.getBrand()) && nCar.getPrice().equals(this.getPrice());
+            isCar = nCar.getBrand().compareToIgnoreCase(brand) == 0;
+            isCar = isCar && nCar.getPrice().compareTo(price) == 0;
         }
 
         return isCar;
