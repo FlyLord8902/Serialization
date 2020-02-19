@@ -7,10 +7,10 @@ public class Driver {
 
     public static void main(String[]args){
         Car car1 = new Car("Lamborghini",new BigDecimal(417826));
-        Car car2 =  null;
+        Car car2;
 
         try {
-            String fileName = "",answer = "", dFileName = "";
+            String fileName, answer, dFileName;
             Scanner input = new Scanner(System.in);
             System.out.println("Do you want to serialize object to binary or csv. (b/c)");
             String decision = input.next();
@@ -58,18 +58,6 @@ public class Driver {
                     System.out.println();
                 }
             }
-
-
-
-
-
-                // Car 2 and 3 are the same, one was de-serialized through reading file and the other with binary.
-
-
-
-
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
