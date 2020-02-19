@@ -35,6 +35,8 @@ public class Driver {
                     }
                 }else if(answer.equalsIgnoreCase("n")){
                     System.out.println();
+                }else{
+                    System.out.println("Invalid key");
                 }
             }else if(decision.equalsIgnoreCase("b")){
                 System.out.print("Enter file name to serialize car: ");
@@ -56,7 +58,11 @@ public class Driver {
                     }
                 }else if(answer.equalsIgnoreCase("n")){
                     System.out.println();
+                }else{
+                    System.out.println("Invalid key");
                 }
+            }else{
+                System.out.println("Invalid key");
             }
         }catch (Exception e){
             e.printStackTrace();
